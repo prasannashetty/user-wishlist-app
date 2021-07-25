@@ -1,0 +1,60 @@
+<center>
+<h1>User Wish-List App</h1>
+
+<b>Create your wish list record here</b>
+
+<form action="/save" method="POST">
+
+	<label for="username">username</label>
+	<input name="username" id="username"><br><br>
+
+	<label for="place">Favorite Place</label>
+	<input name="place" id="place"><br><br>
+
+	<label for="food">Favorite Food</label>
+	<input name="food" id="food"><br><br>
+
+	<input type="submit" value="save">
+
+</form>
+
+<b>Type in the username and fetch the wishlist</b>
+<form action="/get" method="POST">
+	<label for="username">Username</label>
+	<input name="username" id="username">
+	<input type="submit" name="submit">
+	
+</form>
+
+{% if get %}
+<font color="blue">The wishlist for <b>{{username}}</b> is <b>{{place}}</b> and food <b>{{food}}</b>!!!</font>
+{% endif %}
+
+{% if no_record %}
+<font color="red">{{msg}}</font>
+{% endif %}
+
+
+{% if user_exists %}
+<font color="red">The user <b>{{username}}</b> already has wishlist with 
+place <b>{{place}}</b> and food <b>{{food}}</b></font>
+<small>{{msg}}</small>
+{% endif %}
+
+{% if saved %}
+<font color="green">Successfully saved data for <b>{{username}}</b> with wishlist <b>{{place}}</b> and food <b>{{food}}</b>!!!</font>
+{% endif %}
+
+</center>
+<br>
+<a href="/keys">Keys</a>
+{% if keys %}
+	<h3>Keys</h3>
+	<small>(From Database)</small>
+		<ul>
+		{% for username in usernames %}
+			<li>{% username %}</li>
+		{% endfor %}
+		</ul>
+{% endif %}
+
